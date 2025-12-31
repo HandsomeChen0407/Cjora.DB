@@ -7,7 +7,7 @@ namespace Cjora.DB.Services;
 /// <summary>
 /// 系统缓存服务
 /// </summary>
-public class SysCacheService
+public class SysCacheService: ISingleton
 {
     private static ICacheProvider _cacheProvider;
     private readonly CacheOptions _cacheOptions;

@@ -31,7 +31,5 @@ public static class CacheSetup
 
         // 内存缓存兜底。在没有配置Redis时，使用内存缓存，逻辑代码无需修改
         services.TryAddSingleton<ICacheProvider, CacheProvider>();
-        services.AddSingleton<SysCacheService>();
-        services.AddSingleton<SysGeoCacheService>();
     }
 }

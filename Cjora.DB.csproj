@@ -17,12 +17,12 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageLicenseUrl />
     <PackageProjectUrl>https://github.com/HandsomeChen0407/Cjora.DB</PackageProjectUrl>
-    <PackageReleaseNotes>解决redis单例注册的问题</PackageReleaseNotes>
+    <PackageReleaseNotes>代码优化</PackageReleaseNotes>
     <PackageTags />
     <Product>Cjora.DB</Product>
     <RepositoryType />
     <RepositoryUrl />
-    <Version>1.3.0</Version>
+    <Version>1.4.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
