@@ -79,11 +79,11 @@ public static partial class ObjectExtension
     /// </summary>
     /// <param name="obj"></param>
     /// <returns></returns>
-    public static long ParseToInt(this object obj)
+    public static int ParseToInt(this object obj)
     {
         try
         {
-            return long.Parse(obj.ToString());
+            return int.Parse(obj.ToString());
         }
         catch
         {
@@ -97,11 +97,11 @@ public static partial class ObjectExtension
     /// <param name="str"></param>
     /// <param name="defaultValue"></param>
     /// <returns></returns>
-    public static long ParseToInt(this string str, long defaultValue)
+    public static int ParseToInt(this string str, int defaultValue)
     {
         try
         {
-            return long.Parse(str);
+            return int.Parse(str);
         }
         catch
         {
