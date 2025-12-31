@@ -17,12 +17,12 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageLicenseUrl />
     <PackageProjectUrl>https://github.com/HandsomeChen0407/Cjora.DB</PackageProjectUrl>
-    <PackageReleaseNotes>代码优化</PackageReleaseNotes>
+    <PackageReleaseNotes>自定义序列化提供器 Newtonsoft.Json 实现</PackageReleaseNotes>
     <PackageTags />
     <Product>Cjora.DB</Product>
     <RepositoryType />
     <RepositoryUrl />
-    <Version>1.4.0</Version>
+    <Version>1.5.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
