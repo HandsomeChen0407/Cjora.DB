@@ -3,7 +3,7 @@
 /// <summary>
 /// 缓存相关常量
 /// </summary>
-public class CacheConst
+public class DBCacheConst
 {
     /// <summary>
     /// 用户机构缓存

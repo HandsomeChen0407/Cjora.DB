@@ -17,11 +17,11 @@ public static class SqlSugarFilter
         var sysCacheService = App.GetService<SysCacheService>();
 
         // 删除用户机构集合缓存
-        sysCacheService.Remove($"{CacheConst.KeyUserOrg}{userId}");
+        sysCacheService.Remove($"{DBCacheConst.KeyUserOrg}{userId}");
         // 删除用户选中机构
-        sysCacheService.HashDel<List<long>>(CacheConst.KeyUserOrgSelectProduct, userId.ToString());
+        sysCacheService.HashDel<List<long>>(DBCacheConst.KeyUserOrgSelectProduct, userId.ToString());
         // 删除最大数据权限缓存
-        sysCacheService.Remove($"{CacheConst.KeyRoleMaxDataScope}{userId}");
+        sysCacheService.Remove($"{DBCacheConst.KeyRoleMaxDataScope}{userId}");
         // 删除用户机构（数据范围）缓存——过滤器
         _cache.Remove($"db:{dbConfigId}:orgList:{userId}");
         // 删除用户机构（拦截器绑定）
@@ -37,10 +37,10 @@ public static class SqlSugarFilter
     {
         var sysCacheService = App.GetService<SysCacheService>();
         var productType = App.User?.FindFirst(ClaimConst.ProductType)?.Value;
-        var orgIdList = sysCacheService.Get<List<long>>($"{CacheConst.KeyUserOrg}{userId}");
+        var orgIdList = sysCacheService.Get<List<long>>($"{DBCacheConst.KeyUserOrg}{userId}");
         if (orgIdList != null && orgIdList.Any())
         {
-            var orgIdSelectList = sysCacheService.HashGetOne<List<long>>(CacheConst.KeyUserOrgSelectProduct + productType, userId.ToString());
+            var orgIdSelectList = sysCacheService.HashGetOne<List<long>>(DBCacheConst.KeyUserOrgSelectProduct + productType, userId.ToString());
             if (orgIdSelectList != null && orgIdSelectList.Any()) 
             {
                 var data = orgIdList.Where(it => orgIdSelectList.Contains(it));
@@ -87,7 +87,7 @@ public static class SqlSugarFilter
 
         var idNumber = userId.ParseToLong();
         // 获取用户最大数据范围---仅本人数据
-        maxDataScope = App.GetRequiredService<SysCacheService>().Get<int>(CacheConst.KeyRoleMaxDataScope + userId);
+        maxDataScope = App.GetRequiredService<SysCacheService>().Get<int>(DBCacheConst.KeyRoleMaxDataScope + userId);
         if (maxDataScope != (int)DataScopeEnum.Self) return maxDataScope;
 
         db.QueryFilter.AddTableFilter<IUserIdFilter>(u => idNumber == u.CreateUserId);

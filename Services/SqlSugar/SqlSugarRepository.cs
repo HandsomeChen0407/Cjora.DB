@@ -44,7 +44,7 @@ public class SqlSugarRepository<T> : SimpleClient<T> where T : class, new()
         string? tenantId;
         if (!string.IsNullOrWhiteSpace(deviceImei))
             // 设备维度解析租户
-            tenantId = _sysCacheService.Get<string>($"{CacheConst.KeyDeviceTenantId}{deviceImei}");
+            tenantId = _sysCacheService.Get<string>($"{DBCacheConst.KeyDeviceTenantId}{deviceImei}");
         else
             // 用户维度解析租户
             tenantId = App.User?.FindFirst(ClaimConst.TenantId)?.Value;
@@ -77,7 +77,7 @@ public class SqlSugarRepository<T> : SimpleClient<T> where T : class, new()
     /// <returns></returns>
     public TenantDto? GetTenantCache(long tenantId)
     {
-        return _sysCacheService.Get<List<TenantDto>>(CacheConst.KeyTenantAES)?.First(u => u.Id == tenantId);
+        return _sysCacheService.Get<List<TenantDto>>(DBCacheConst.KeyTenantAES)?.First(u => u.Id == tenantId);
     }
 
     /// <summary>
