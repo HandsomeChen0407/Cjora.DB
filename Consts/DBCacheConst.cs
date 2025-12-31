@@ -26,11 +26,6 @@ public class DBCacheConst
     public const string KeyTenantAES = "sys_tenant_aes";
 
     /// <summary>
-    /// 设备归属租户id
-    /// </summary>
-    public const string KeyDeviceTenantId = "device_tid:";
-
-    /// <summary>
     /// 用户脱敏角色
     /// </summary>
     public const string KeySysUserTMRole = "sensitive_data_viewer";

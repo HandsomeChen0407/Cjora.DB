@@ -8,6 +8,8 @@ public class SqlSugarRepository<T> : SimpleClient<T> where T : class, new()
 {
     protected ITenant iTenant;
 
+    private bool _disposed;
+
     /// <summary>
     /// 系统缓存服务
     /// </summary>
@@ -19,7 +21,7 @@ public class SqlSugarRepository<T> : SimpleClient<T> where T : class, new()
     /// </summary>
     private static readonly ConcurrentDictionary<long, object> _tenantLocks = new();
 
-    public SqlSugarRepository(string? deviceImei = null)
+    public SqlSugarRepository(string? tenantId = null)
     {
         // 获取 SqlSugar 多租户管理器
         iTenant = App.GetRequiredService<ISqlSugarClient>().AsTenant();
@@ -27,35 +29,37 @@ public class SqlSugarRepository<T> : SimpleClient<T> where T : class, new()
         // 默认兜底：先绑定主库连接
         base.Context = iTenant.GetConnectionScope(SqlSugarConst.MainConfigId);
 
-        // 若实体贴有多库特性，则返回指定库连接
-        if (typeof(T).IsDefined(typeof(TenantAttribute), false))
+        // 租户维度解析
+        if (string.IsNullOrWhiteSpace(tenantId)) 
         {
-            base.Context = iTenant.GetConnectionScopeWithAttr<T>();
-            return;
-        }
+            // 若实体贴有多库特性，则返回指定库连接
+            if (typeof(T).IsDefined(typeof(TenantAttribute), false))
+            {
+                base.Context = iTenant.GetConnectionScopeWithAttr<T>();
+                return;
+            }
 
-        // 若实体贴有系统表特性，则返回默认库连接
-        if (typeof(T).IsDefined(typeof(SysTableAttribute), false))
-        {
-            base.Context = iTenant.GetConnectionScope(SqlSugarConst.MainConfigId);
-            return;
-        }
+            // 若实体贴有系统表特性，则返回默认库连接
+            if (typeof(T).IsDefined(typeof(SysTableAttribute), false))
+            {
+                base.Context = iTenant.GetConnectionScope(SqlSugarConst.MainConfigId);
+                return;
+            }
 
-        string? tenantId;
-        if (!string.IsNullOrWhiteSpace(deviceImei))
-            // 设备维度解析租户
-            tenantId = _sysCacheService.Get<string>($"{DBCacheConst.KeyDeviceTenantId}{deviceImei}");
-        else
             // 用户维度解析租户
-            tenantId = App.User?.FindFirst(ClaimConst.TenantId)?.Value;
-
+            var user = App.User;
+            if (user != null)
+            {
+                tenantId = user.FindFirst(ClaimConst.TenantId)?.Value;
+            }
+        }
+        
         // 解析失败：记录错误并回退主库（宽容策略）
         if (!long.TryParse(tenantId, out var tenantLongId)) 
         {
             Furion.Logging.Log.Error(
-            "租户ID解析失败，TenantId={TenantId}, DeviceImei={DeviceImei}, Entity={Entity}",
+            "租户ID解析失败，TenantId={TenantId}, Entity={Entity}",
             tenantId,
-            deviceImei,
             typeof(T).FullName);
 
             return;
@@ -77,7 +81,7 @@ public class SqlSugarRepository<T> : SimpleClient<T> where T : class, new()
     /// <returns></returns>
     public TenantDto? GetTenantCache(long tenantId)
     {
-        return _sysCacheService.Get<List<TenantDto>>(DBCacheConst.KeyTenantAES)?.First(u => u.Id == tenantId);
+        return _sysCacheService.Get<List<TenantDto>>(DBCacheConst.KeyTenantAES)?.FirstOrDefault(u => u.Id == tenantId);
     }
 
     /// <summary>
