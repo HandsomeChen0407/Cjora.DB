@@ -17,12 +17,12 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageLicenseUrl />
     <PackageProjectUrl>https://github.com/HandsomeChen0407/Cjora.DB</PackageProjectUrl>
-    <PackageReleaseNotes>对象拓展、枚举拓展</PackageReleaseNotes>
+    <PackageReleaseNotes>上传包1.0.1未成功重新推送</PackageReleaseNotes>
     <PackageTags />
     <Product>Cjora.DB</Product>
     <RepositoryType />
     <RepositoryUrl />
-    <Version>1.0.1</Version>
+    <Version>1.1.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
