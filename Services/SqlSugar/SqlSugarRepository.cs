@@ -84,7 +84,7 @@ public class SqlSugarRepository<T> : SimpleClient<T> where T : class, new()
     /// 获取（或创建）指定租户的数据库连接作用域
     /// </summary>
     /// <param name="iTenant">SqlSugar 多租户管理器（全局单例）</param>
-    /// <param name="租户唯一标识，用于区分不同数据库连接">租户id</param>
+    /// <param name="tenantId">租户唯一标识，用于区分不同数据库连接</param>
     /// <returns></returns>
     /// <exception cref="InvalidOperationException"></exception>
     public SqlSugarScopeProvider GetTenantDbConnectionScope(ITenant iTenant, long tenantId)
