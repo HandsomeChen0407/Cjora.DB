@@ -2,7 +2,7 @@
 
 namespace Cjora.DB.Services;
 
-public class SysGeoCacheService : ISingleton
+public class SysGeoCacheService
 {
     private readonly FullRedis _redis;
     private readonly CacheOptions _cacheOptions;

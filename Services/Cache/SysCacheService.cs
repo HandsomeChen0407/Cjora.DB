@@ -1,6 +1,4 @@
-using Cjora.DB.Options;
 using Microsoft.Extensions.Options;
-using NewLife.Caching;
 using Newtonsoft.Json;
 using System.Web;
 
@@ -9,7 +7,7 @@ namespace Cjora.DB.Services;
 /// <summary>
 /// 系统缓存服务
 /// </summary>
-public class SysCacheService : ISingleton
+public class SysCacheService
 {
     private static ICacheProvider _cacheProvider;
     private readonly CacheOptions _cacheOptions;
