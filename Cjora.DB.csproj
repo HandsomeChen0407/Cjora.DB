@@ -4,6 +4,25 @@
     <TargetFrameworks>net8.0;net10.0</TargetFrameworks>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+    <Authors>HandsomeChen0407</Authors>
+    <Company>Cjora.DB</Company>
+    <Copyright>Copyright © 2025 HandsomeChen0407</Copyright>
+    <Description>基于 Admin.NET 二次开发的数据库连接库</Description>
+    <Name />
+    <PackageIcon />
+    <PackageIconUrl />
+    <PackageId>Cjora.DB</PackageId>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageLicenseUrl />
+    <PackageProjectUrl>https://github.com/HandsomeChen0407/Cjora.DB</PackageProjectUrl>
+    <PackageReleaseNotes>项目初始化</PackageReleaseNotes>
+    <PackageTags />
+    <Product>Cjora.DB</Product>
+    <RepositoryType />
+    <RepositoryUrl />
+    <Version>1.0.0</Version>
   </PropertyGroup>
 
   <ItemGroup>
