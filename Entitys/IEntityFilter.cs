@@ -1,0 +1,45 @@
+﻿namespace Cjora.DB.Entitys;
+
+/// <summary>
+/// 假删除接口过滤器
+/// </summary>
+public interface IDeletedFilter
+{
+    /// <summary>
+    /// 软删除
+    /// </summary>
+    bool IsDelete { get; set; }
+}
+
+/// <summary>
+/// 租户Id接口过滤器
+/// </summary>
+public interface ITenantIdFilter
+{
+    /// <summary>
+    /// 租户Id
+    /// </summary>
+    long? TenantId { get; set; }
+}
+
+/// <summary>
+/// 机构Id接口过滤器
+/// </summary>
+public interface IOrgIdFilter
+{
+    /// <summary>
+    /// 创建者部门Id
+    /// </summary>
+    long? CreateOrgId { get; set; }
+}
+
+/// <summary>
+/// 用户Id接口过滤器
+/// </summary>
+public interface IUserIdFilter
+{
+    /// <summary>
+    /// 软删除
+    /// </summary>
+    long? CreateUserId { get; set; }
+}
