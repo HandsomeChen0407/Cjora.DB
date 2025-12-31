@@ -75,6 +75,41 @@ public static partial class ObjectExtension
     }
 
     /// <summary>
+    /// 将object转换为int，若失败则返回0
+    /// </summary>
+    /// <param name="obj"></param>
+    /// <returns></returns>
+    public static long ParseToInt(this object obj)
+    {
+        try
+        {
+            return long.Parse(obj.ToString());
+        }
+        catch
+        {
+            return 0;
+        }
+    }
+
+    /// <summary>
+    /// 将object转换为int，若失败则返回指定值
+    /// </summary>
+    /// <param name="str"></param>
+    /// <param name="defaultValue"></param>
+    /// <returns></returns>
+    public static long ParseToInt(this string str, long defaultValue)
+    {
+        try
+        {
+            return long.Parse(str);
+        }
+        catch
+        {
+            return defaultValue;
+        }
+    }
+
+    /// <summary>
     /// 将object转换为long，若失败则返回0
     /// </summary>
     /// <param name="obj"></param>
